@@ -16,6 +16,6 @@ sudo bash -c "echo \"<html>
 rm -f /data/web_static/current
 sudo ln -sf "/data/web_static/releases/test/" "/data/web_static/current"
 sudo chown -R ubuntu:ubuntu /data/
-sudo sed -i "\t location /hbnb_static/ {\n\talias https://mydomainname.tech/hbnb_static;\n}" /etc/nginx/sites-available/default
+sudo sed -i "\t location /hbnb_static/ {\n\talias /data/web_static/current;\n}" /etc/nginx/sites-available/default
 sudo nginx -t
 sudo service nginx restart

@@ -7,7 +7,7 @@ from fabric.api import local
 def do_pack():
     """ creating .tgz file """
     d = datetime.utcnow()
-    filename = "web_static_{}{}{}{}{}{}.tgz".format(d.year,
+    filename = "versions/web_static_{}{}{}{}{}{}.tgz".format(d.year,
                                                     d.month,
                                                     d.day,
                                                     d.hour,

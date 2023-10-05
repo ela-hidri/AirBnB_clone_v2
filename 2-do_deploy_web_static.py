@@ -5,7 +5,7 @@ from datetime import datetime
 from fabric.api import env, put, run
 import os.path
 
-env.hosts = ["100.26.244.46", "52.91.126.18"]
+env.hosts = ["52.91.126.18", "100.26.244.46"]
 
 
 def do_deploy(archive_path):
@@ -26,5 +26,5 @@ def do_deploy(archive_path):
         run("rm -rf /data/web_static/current")
         run("ln -s {}/ /data/web_static/current".format(no_tgz))
         return True
-    except:
+    finally:
         return False

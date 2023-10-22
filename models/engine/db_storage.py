@@ -42,11 +42,12 @@ class DBStorage:
         if cls is None:
             classes = [State, City, User, Amenity, Place, Review]
         else:
-            classes = [eval(cls)]
+            if type(cls) == str:
+                cls = eval(cls)
+            classes = [cls]
         data = []
         for clas in classes:
             data.extend(self.__session.query(clas).all())
-        print(data)
         return {"{}.{}".format(clas.__name__,
                                d.id): d for clas in classes for d in data}
 
@@ -73,4 +74,4 @@ class DBStorage:
 
     def close(self):
         """ close session """
-        self.__session.remove()
+        self.__session.close()

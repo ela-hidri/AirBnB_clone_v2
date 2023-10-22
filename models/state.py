@@ -5,8 +5,6 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from models.base_model import Base
 from sqlalchemy.orm import relationship
 from os import getenv
-from models.city import City
-from models import storage
 
 
 class State(BaseModel, Base):
@@ -21,11 +19,14 @@ class State(BaseModel, Base):
                           cascade='all,delete-orphan',
                           uselist=True)
     """
-    @property
-    def cities(self):
-        """ get all """
-        cities = []
-        for city in list(storage.all(City).values()):
-            if city.state_id == self.id:
-                cities.append(city)
-        return cities
+    if getenv('HBNB__TYPE_STORAGE') != "db":
+        @property
+        def cities(self):
+            """ get all """
+            from models import storage
+            cities = []
+            allval = storage.all(City).values()
+            for city in list(allval):
+                if city.state_id == self.id:
+                    cities.append(city)
+            return cities

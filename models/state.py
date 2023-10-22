@@ -21,12 +21,11 @@ class State(BaseModel, Base):
                           cascade='all,delete-orphan',
                           uselist=True)
     """
-    if getenv('HBNB__TYPE_STORAGE') != "db":
-        @property
-        def cities(self):
-            """ get all """
-            cities = []
-            for city in list(storage.all(City).values()):
-                if city.state_id == self.id:
-                    cities.append(city)
-            return cities
+    @property
+    def cities(self):
+        """ get all """
+        cities = []
+        for city in list(storage.all(City).values()):
+            if city.state_id == self.id:
+                cities.append(city)
+        return cities

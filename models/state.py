@@ -17,9 +17,7 @@ class State(BaseModel, Base):
                           backref='state',
                           cascade='all,delete-orphan',
                           uselist=True)
+    """
     @property
     def cities(self):
-        session = Session(engine)
-        states = session.query(City).filter(City.state_id == id).all()
-        return states
-        """
+        return all(self)

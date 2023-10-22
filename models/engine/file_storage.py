@@ -67,3 +67,7 @@ class FileStorage:
                     break
             if key is not None:
                 del self.__objects[key]
+
+    def close(self):
+        """ deserializing the JSON file to objects """
+        reload()
